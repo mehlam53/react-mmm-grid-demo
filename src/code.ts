@@ -1,8 +1,6 @@
-import { Box, Rating, Tab, Tabs } from "@mui/material";
+export const code = `import { Rating } from "@mui/material";
 import { useState } from "react";
 import MyGrid, { MMMGridColumnProps } from "react-mmm-grid";
-import { code } from "./code";
-import { CopyBlock } from "react-code-blocks";
 
 const products = [
   {
@@ -31,36 +29,6 @@ const products = [
     id: 5,
   },
 ];
-
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
 
 function App() {
   const columns: MMMGridColumnProps[] = [
@@ -113,27 +81,12 @@ function App() {
         { label: "Kolkata", value: "Kolkata" },
       ],
     },
-    // {
-    //   name: "rating",
-    //   title: "Rating",
-    //   minWidth: 150,
-    //   render: (row: any, rowIndex: number) => (
-    //     <Rating
-    //       name="simple-controlled"
-    //       value={row.rating || 0}
-    //       onChange={(event, newValue) => {
-    //         handleGridChange(rowIndex, "rating", newValue);
-    //       }}
-    //     />
-    //   ),
-    // },
+
     {
       name: "avatar",
       title: "Avatar",
       minWidth: 150,
       render: (row: any, rowIndex: number) => {
-        // const colors = ["red", "green", "blue", "orange", "purple"];
-        // const color = colors[Math.floor(Math.random() * colors.length)];
         return (
           <div>
             <div
@@ -192,11 +145,6 @@ function App() {
     },
   ];
 
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
   const [rows, setRows] = useState([{}]);
   const [activeGridRow, setActiveGridRow] = useState<any>();
 
@@ -285,21 +233,11 @@ function App() {
   };
 
   return (
-    <div style={{width:'100%'}}>
+    <div>
       <h1 style={{ textAlign: "center", color: "gray" }}>
         <u>MMM Grid Demo</u>
       </h1>
 
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', width:'100%' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Demo" {...a11yProps(0)} />
-          <Tab label="Code" {...a11yProps(1)} />
-         
-        </Tabs>
-      </Box>
-      <div style={{width:'100%'}}>
-
-      <CustomTabPanel value={value} index={0}>
       <h2 style={{ color: "gray" }}>Grid 1</h2>
       <MyGrid
         columns={columns}
@@ -337,26 +275,10 @@ function App() {
       </div>
       <br />
       <br />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-         {/* code  */}
-         <div style={{ padding: 10, backgroundColor: "#f9f9f9", width:'100%' }}>
-        {/* <pre>{code}</pre> */}
-        <CopyBlock
-      text={code}
-      language={"tsx"}
-      showLineNumbers={true}
-      
-    />
-      </div>
-      </CustomTabPanel>
-      </div>
-
-
-
-
     </div>
+    
   );
 }
 
 export default App;
+`;
